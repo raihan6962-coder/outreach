@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { useAuth } from '@/hooks/useAuth'
+import { api } from '@/lib/api-client'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
 
@@ -11,7 +11,6 @@ function ResetPasswordForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
-  const { resetPassword, updatePassword } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -23,7 +22,7 @@ function ResetPasswordForm() {
     setLoading(true)
 
     try {
-      await resetPassword(email)
+      await api.request('/auth/forgot-password', { method: 'POST', body: { email } })
       setSent(true)
       toast.success('Reset link sent to your email')
     } catch (err: unknown) {
@@ -50,7 +49,7 @@ function ResetPasswordForm() {
     setLoading(true)
 
     try {
-      await updatePassword(token!, password)
+      await api.request('/auth/reset-password', { method: 'POST', body: { token: token!, new_password: password } })
       toast.success('Password updated successfully')
       router.replace('/login')
     } catch (err: unknown) {
