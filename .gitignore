@@ -1,12 +1,28 @@
-node_modules/
-.next/
+# Python
 __pycache__/
-*.pyc
-.env
-.env.local
+*.py[cod]
 *.egg-info/
 dist/
 build/
 .venv/
 venv/
 *.sqlite3
+
+# Node
+node_modules/
+.next/
+out/
+
+# Env
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

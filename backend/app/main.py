@@ -1,7 +1,10 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from contextlib import asynccontextmanager
+from pathlib import Path
 from app.config import settings
 from app.database import engine, Base
 from app.routers import auth, gmail, sheets, leads, templates, campaigns, inbox, pipeline, analytics, spam_test, warmup, notifications
@@ -26,7 +29,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.FRONTEND_URL],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -45,8 +48,12 @@ app.include_router(spam_test.router, prefix="/api/v1/spam-test", tags=["Spam Tes
 app.include_router(warmup.router, prefix="/api/v1/warmup", tags=["Warmup"])
 app.include_router(notifications.router, prefix="/api/v1/notifications", tags=["Notifications"])
 
+static_dir = Path(__file__).parent.parent / "static"
+if static_dir.exists():
+    app.mount("/", StaticFiles(directory=str(static_dir), html=True), name="static")
 
-@app.get("/health")
+
+@app.get("/api/health")
 async def health():
     return {"status": "healthy", "version": "1.0.0"}
 
