@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["nodejs_22", "gcc", "libpq-dev"]
+nixPkgs = ["nodejs_22"]
 
 [phases.install]
 cmds = [
