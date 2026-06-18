@@ -1,0 +1,12 @@
+[phases.setup]
+nixPkgs = ["nodejs_22", "gcc", "libpq-dev"]
+
+[phases.install]
+cmds = [
+  "cd frontend && npm ci",
+  "cd frontend && npm run build",
+  "mkdir -p static && cp -r frontend/out/* static/"
+]
+
+[start]
+cmd = "bash start.sh"

@@ -48,7 +48,7 @@ app.include_router(spam_test.router, prefix="/api/v1/spam-test", tags=["Spam Tes
 app.include_router(warmup.router, prefix="/api/v1/warmup", tags=["Warmup"])
 app.include_router(notifications.router, prefix="/api/v1/notifications", tags=["Notifications"])
 
-static_dir = Path(__file__).parent.parent / "static"
+static_dir = Path(__file__).parent.parent.parent / "static"
 if static_dir.exists():
     app.mount("/", StaticFiles(directory=str(static_dir), html=True), name="static")
 
