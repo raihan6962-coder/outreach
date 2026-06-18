@@ -24,8 +24,9 @@ class ApiClient {
     else localStorage.removeItem("access_token")
   }
 
-  private async request<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
-    const url = new URL(`${this.baseUrl}${endpoint}`)
+  async request<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
+    const path = `${this.baseUrl}${endpoint}`
+    const url = path.startsWith("http") ? new URL(path) : new URL(path, window.location.origin)
     if (options.params) {
       Object.entries(options.params).forEach(([key, value]) => url.searchParams.set(key, value))
     }
