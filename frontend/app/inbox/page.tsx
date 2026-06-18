@@ -54,10 +54,11 @@ export default function InboxPage() {
       setDetail(null)
       return
     }
+    const id: string = selectedId
     async function loadDetail() {
       try {
         setDetailLoading(true)
-        const data = await api.getInboxMessage(selectedId)
+        const data = await api.getInboxMessage(id)
         setDetail(data)
       } catch (err) {
         console.error("Failed to load message detail", err)

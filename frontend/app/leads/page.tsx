@@ -250,7 +250,6 @@ export default function LeadsPage() {
                 <TableHead className="w-10">
                   <Checkbox
                     checked={paginatedLeads.length > 0 && paginatedLeads.every((l) => selected.has(l.id))}
-                    indeterminate={paginatedLeads.some((l) => selected.has(l.id)) && !paginatedLeads.every((l) => selected.has(l.id))}
                     onCheckedChange={toggleAll}
                   />
                 </TableHead>

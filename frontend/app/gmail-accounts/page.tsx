@@ -131,7 +131,7 @@ export default function GmailAccountsPage() {
     setDetailOpen(true)
     setDetailLoading(true)
     try {
-      const health = await api.getGmailHealth(account.id)
+      const health = await api.getAccountHealth(account.id)
       setDetailData(health)
     } catch {
       toast.error("Failed to load account details")

@@ -18,4 +18,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   )
 }
 
-export const useAuthContext = () => useContext(AuthContext)
+export const useAuthContext = () => {
+  const ctx = useContext(AuthContext)
+  return ctx ?? { user: null, isLoading: true, isAuthenticated: false }
+}

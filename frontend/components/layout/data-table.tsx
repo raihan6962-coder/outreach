@@ -202,7 +202,6 @@ export function DataTable<T extends Record<string, any>>({
                 <TableHead className="w-10">
                   <Checkbox
                     checked={allSelected}
-                    indeterminate={!allSelected && someSelected}
                     onCheckedChange={toggleAll}
                   />
                 </TableHead>

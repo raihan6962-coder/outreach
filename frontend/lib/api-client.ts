@@ -91,7 +91,7 @@ class ApiClient {
     return this.request<any>(`/gmail/accounts/${id}`, { method: "DELETE" })
   }
 
-  async getGmailHealth(id: string) {
+  async getAccountHealth(id: string) {
     return this.request<any>(`/gmail/accounts/${id}/health`)
   }
 
